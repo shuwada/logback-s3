@@ -1,8 +1,34 @@
+*.bak
+*~
+*.swp
+*.tmp
 *.class
-*.classpath
-*.project
+*.log
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Maven
+target/
+
+# Eclipse
+.project
+.classpath
+.settings/
+/bin
+
+# Netberans
+nbproject/
+nbactions.xml
+
+# IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
