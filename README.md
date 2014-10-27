@@ -10,7 +10,7 @@ Example logback.xml
 ----------
 An example logback.xml that uses `S3FixedWindowRollingPolicy` with `RollingFileAppender`.
 
-```
+```xml
 <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
   <file>/var/log/myapp.log</file>
   <encoder>
@@ -25,23 +25,23 @@ An example logback.xml that uses `S3FixedWindowRollingPolicy` with `RollingFileA
   -->
   <rollingPolicy class="ch.qos.logback.core.rolling.S3FixedWindowRollingPolicy">
     <fileNamePattern>/var/log/myapp.log.%i.gz</fileNamePattern>
-        <awsAccessKey>accesskey</awsAccessKey>
-        <awsSecretKey>secretkey</awsSecretKey>
-        <s3BucketName>com.mybucket</s3BucketName>
-        <s3FolderName>log</s3FolderName>
+    <awsAccessKey>accesskey</awsAccessKey>
+    <awsSecretKey>secretkey</awsSecretKey>
+    <s3BucketName>com.mybucket</s3BucketName>
+    <s3FolderName>log</s3FolderName>
 
-        <rollingOnExit>true</rollingOnExit>
-    </rollingPolicy>
+    <rollingOnExit>true</rollingOnExit>
+  </rollingPolicy>
 
-    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-        <maxFileSize>10MB</maxFileSize>
-    </triggeringPolicy>
+  <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>10MB</maxFileSize>
+  </triggeringPolicy>
 </appender>
 ```
 
 By suppressing the log rolling as follows, the appender works exactly same as `FileAppender` plus S3 upload.
 
-```
+```xml
 <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
   ...
@@ -50,19 +50,19 @@ By suppressing the log rolling as follows, the appender works exactly same as `F
     <!-- this file name won't be used since log rolling is suppressed -->
     <fileNamePattern>/var/log/myapp.log.%i.gz</fileNamePattern>
 
-        ...
+      ...
 
-        <rollingOnExit>false</rollingOnExit>
+      <rollingOnExit>false</rollingOnExit>
 
-        <!--
-            Suppress rolling.
-            Note that rollingOnExit = true does not work with this config.
-         -->
-        <maxIndex>-1</maxIndex>
-        <minIndex>-1</minIndex>
-    </rollingPolicy>
+      <!--
+          Suppress rolling.
+          Note that rollingOnExit = true does not work with this config.
+       -->
+      <maxIndex>-1</maxIndex>
+      <minIndex>-1</minIndex>
+  </rollingPolicy>
 
-    ...
+  ...
 
 </appender>
 ```
